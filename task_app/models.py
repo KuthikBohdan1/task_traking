@@ -35,4 +35,4 @@ class Comment(models.Model):
     media = models.FileField(upload_to="comments")
 
     def __str__(self):
-        return (self.text)
+        return (self.text)  

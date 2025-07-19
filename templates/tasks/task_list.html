@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "conteiner mt-3">
+        <h2>список завданнь</h2>
+        <a href="#" class="btn btn-primary mb-3">доадати завдання</a>
+        <ul class="list-group">
+            {% for task in tasks  %}
+        <li class="list-group-item">
+            <a href="{% url 'task_datail' task.pk %}" >{{ task.title }}</a>
+            <span class="badge badge-primary">{{ task.status }}</span>
+            <span class="badge badge-secondary">{{ task.priority }}</span>
+        </li>
+        {% empty %}
+        <li class="list-group-item">завдань не знайдено</li>
+        {% endfor %}
+        </ul>
+
+    </div>
+    
+{% endblock content %}

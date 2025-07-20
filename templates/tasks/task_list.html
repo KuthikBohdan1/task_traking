@@ -6,8 +6,20 @@
         <a href="{% url 'tasks:task-create' %}" class="btn btn-primary mb-3">доадати завдання</a>
         <ul class="list-group">
             {% for task in tasks  %}
-        <li class="list-group-item">
-            <a href="{% url 'tasks:task-detail' task.pk %}" >{{ task.title }}</a>
+
+
+        <li class="list-group-item d-flex justify-content-between align-item-center">
+            <div>
+                <a href="{% url 'tasks:task-detail' task.pk %}" >{{ task.title }}</a>
+                <span class = "badge badge-primary">{{ task.status }}</span>
+                <span class = "badge badge-secondary">{{ task.priority }}</span>
+            </div>
+            <form action="{% url 'tasks:task-complate' task.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn bnt-warning btn-sm">помітити як виконанно</button>
+
+            </form>
+            
         </li>
         {% empty %}
         <li class="list-group-item">завдань не знайдено</li>

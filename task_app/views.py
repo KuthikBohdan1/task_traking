@@ -6,7 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from task_app import models
 from django.views.generic import ListView, DetailView, CreateView, View
 from task_app.mixins import UserIsOwnerMixin
-from django.http import HattpResponseRedirect
+from django.http import HttpResponseRedirect
+
 class TaskListView(ListView):
     model = models.Task
     context_object_name = "tasks"
@@ -37,4 +38,9 @@ class TaskComplateView(LoginRequiredMixin, UserIsOwnerMixin, View):
         task.status = "done"
         task.save()
 
-        return HattpResponseRedirect(reverse_lazy("tasks:task-list"))
+        return HttpResponseRedirect(reverse_lazy("tasks:task-list")) 
+    
+
+    def get_object(self):
+        task_id = self.kwargs.get('pk')
+        return get_object_or_404(models.Task, pk=task_id)

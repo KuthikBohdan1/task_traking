@@ -4,6 +4,19 @@
     <div class = "conteiner mt-3">
         <h2>список завданнь</h2>
         <a href="{% url 'tasks:task-create' %}" class="btn btn-primary mb-3">доадати завдання</a>
+
+        <br>
+
+        <form action="" method="get" class="form-inline mb-3">
+            {{ form.status.label_tag }}
+            {{ form.status }}
+            <button type="submit" class="btn btn-primary ml-2">фільтрувати</button>
+        </form>
+
+
+
+
+
         <ul class="list-group">
             {% for task in tasks  %}
 

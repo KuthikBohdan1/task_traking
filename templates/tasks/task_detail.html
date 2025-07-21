@@ -5,10 +5,10 @@
 <div class="container m-3">
     <h2>{{ task.title }}</h2>
     <p>{{ task.description }}</p>
-    <p>статус <span class="badge badge-primary">{{ task.status }}</span></p>
-    <p>пріорітети <span class="badge badge-secondary">{{ task.priority }}</span></p>
-    <a href="#">редагувати </a>
-    <a href="#">видалити</a>
+    <p>статус <span class="badge bg-primary">{{ task.status }}</span></p>
+    <p>пріорітети <span class="badge bg-secondary">{{ task.priority }}</span></p>
+    <a class = "btn btn-secondary" href="{% url 'tasks:task-update' task.id %}">редагувати </a>
+    <a class = "btn btn-warning" href="{% url 'tasks:task-delete' task.id %}">видалити</a>
 
 
 </div>

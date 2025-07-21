@@ -10,3 +10,11 @@ class TaskForm(forms.ModelForm):
         ]
 
         
+class TaskFilterForm(forms.Form):
+    STATUS_CHOICES = [
+        ("","всі"), 
+        ("todo", "To Do"),
+        ("in_progress", "In Progress"),
+        ("done", "Done"),
+    ]
+    status = forms.ChoiceField(choices=STATUS_CHOICES, required=False, label="Статус")

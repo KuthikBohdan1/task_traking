@@ -14,11 +14,21 @@ class TaskListView(ListView):
     template_name = "tasks/task_list.html"
 
     def get_queryset(self):
+        
         queryset = super().get_queryset()
         status = self.request.GET.get("status", "")
         if status:
             queryset = queryset.filter(status=status)
+
+        priority = self.request.GET.get("priority", "")
+        if priority:
+            queryset = queryset.filter(priority=priority)
+
+
         return queryset
+
+    
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

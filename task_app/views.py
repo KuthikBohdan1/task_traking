@@ -43,6 +43,15 @@ class TaskDetailView(DetailView):
     context_object_name = "task"
     template_name = "tasks/task_detail.html"
 
+class TaskComentView(DetailView):
+    model = models.Comment
+    context_object_name = "task"
+    template_name = "tasks/task_coment.html"
+
+
+
+
+
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = models.Task

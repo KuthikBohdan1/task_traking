@@ -41,6 +41,11 @@
                     <span class="badge bg-primary">{{ task.status }}</span>
                     <span class="badge bg-secondary">{{ task.priority }}</span>
                 </div>
+
+                <div>
+                    <a href="{% url 'tasks:task-coment' task.pk %}"> додати коментар до {{ task.title }}</a> 
+                </div>
+                
             <form action="{% url 'tasks:task-complate' task.pk %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn bnt-warning btn-sm">помітити як виконанно</button>

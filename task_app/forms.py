@@ -1,5 +1,5 @@
 from django import forms
-from task_app.models import Task
+from task_app.models import Task, Comment
 
 
 class TaskForm(forms.ModelForm):
@@ -16,9 +16,14 @@ class TaskForm(forms.ModelForm):
 
         self.fields["deadline"].widget.attrs["class"] += " my-custom=datepicker"
             
+# class ComentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = [
+#             "text", "date", "author", "task"
+#         ]
 
 
-        
 class TaskFilterForm(forms.Form):
     STATUS_CHOICES = [
         ("","всі"), 
@@ -42,6 +47,8 @@ class TaskFilterForm(forms.Form):
         self.fields["priority"].widget.attrs.update({"class": "form-control"})
         
 
+
+
     
 
 # class TaskFilterForm1(forms.Form):
@@ -56,3 +63,5 @@ class TaskFilterForm(forms.Form):
 #         super(TaskFilterForm1, self).__init__(*args, **kwargs)
 #         self.fields["priority"].widget.attrs.update({"class": "form-control"})
         
+
+

@@ -1,11 +1,9 @@
-{% extends 'base.html' %}
-{% block content %}
 <div class="container mt-3">
     <h2>додати коиентар до {{ tasks.task }}</h2>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-sucess" > зберегти </button>
+        <button type="submit" class="btn btn-sucess" > зберегти коментар</button>
     </form>
 
 
@@ -13,4 +11,3 @@
 
 
 
-{% endblock content %}

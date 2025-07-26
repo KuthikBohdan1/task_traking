@@ -2,22 +2,20 @@
 {% block content %}
 
 <div class="container">
+<div class="row">
 
-    <h2>додати кментар до завдання {{ object.title }}</h2>
-
-    <ul class="list-group">
+<div class="col"><ul class="list-group">
         <li class="list-group-item"> <h3>{{ task.text }}</h3> <ul> author :{{ task.author }} date:{{ task.date }}</li>
         
-      </ul>
-
-
-
-
+      </ul></div>
+<div class="col">
+{% include 'tasks/task_coment_form.html' %}
+</div>
 
 
 </div>
 
-
+</div>
 {% endblock content %}
 
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from .models import Task, Comment
-from task_app.forms import TaskForm, TaskFilterForm
+from task_app.forms import TaskForm, TaskFilterForm, ComentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from task_app import models
 from django.views.generic import ListView, DetailView, CreateView, View, UpdateView, DeleteView
@@ -50,9 +50,6 @@ class TaskComentView(DetailView):
 
 
 
-
-
-
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = models.Task
     template_name = "tasks/task_form.html"
@@ -63,7 +60,12 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-
+class ComentCreateView(LoginRequiredMixin, CreateView):
+    model = models.Comment
+    template_name = "tasks/task_coment.html"
+    form_class = ComentForm
+    success_url = reverse_lazy("")
+    
 
 
 class TaskComplateView(LoginRequiredMixin, UserIsOwnerMixin, View):

@@ -11,10 +11,6 @@ urlpatterns = [
     path("task-create", views.TaskCreateView.as_view(), name="task-create" ),
     path("<int:pk>/complate/" , views.TaskComplateView.as_view(), name = "task-complate")
 
-
-
-
-
 ]
 
 app_name = "tasks"

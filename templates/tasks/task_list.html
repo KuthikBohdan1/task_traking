@@ -27,19 +27,13 @@
         <ul class="list-group">
             {% for task in tasks  %}
 
-{% comment %} Починаючи з Bootstrap 5, класи badge-primary, badge-secondary тощо застаріли, і замість них потрібно використовувати badge + bg-*.
-        <li class="list-group-item d-flex justify-content-between align-item-center">
-            <div>
-                <a href="{% url 'tasks:task-detail' task.pk %}" >{{ task.title }}</a>
-                <span class = "badge badge-primary">{{ task.status }}</span>
-                <span class = "badge badge-secondary">{{ task.priority }}</span>
-            </div> {% endcomment %}
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     <a href="{% url 'tasks:task-detail' task.pk %}">{{ task.title }}</a>
                     <span class="badge bg-primary">{{ task.status }}</span>
                     <span class="badge bg-secondary">{{ task.priority }}</span>
+                    <span class="badge bg-secondary">{{ task.author }}</span>
                 </div>
 
                 <div>

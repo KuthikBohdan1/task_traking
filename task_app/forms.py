@@ -1,13 +1,23 @@
 from django import forms
 from task_app.models import Task, Comment
+from django.forms import ModelForm, TextInput, Textarea, DateTimeInput, DateInput
 
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
+
+        
         fields = [
             "title", "description", "status","priority", "deadline", 
         ]
+        widgets = {
+            'deadline' : DateTimeInput(attrs={
+                'class': 'form-control',
+                'type': 'datetime-local'
+            }),
+
+        }
 
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)

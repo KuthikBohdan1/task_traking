@@ -7,8 +7,10 @@
     <p>{{ task.description }}</p>
     <p>статус <span class="badge bg-primary">{{ task.status }}</span></p>
     <p>пріорітети <span class="badge bg-secondary">{{ task.priority }}</span></p>
-    <a class = "btn btn-secondary" href="{% url 'tasks:task-update' task.id %}">редагувати </a>
-    <a class = "btn btn-warning" href="{% url 'tasks:task-delete' task.id %}">видалити</a>
+    <a class = "btn btn-secondary d-flex justify-content-between align-items-center" href="{% url 'tasks:task-update' task.id %}">редагувати </a>
+
+
+    <a class = "btn btn-warning d-flex justify-content-between align-items-center bi bi-trash" href="{% url 'tasks:task-delete' task.id %}">видалити</a>
 
 
 </div>

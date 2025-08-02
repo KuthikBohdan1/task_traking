@@ -7,15 +7,17 @@ from task_app import models
 from django.views.generic import ListView, DetailView, CreateView, View, UpdateView, DeleteView
 from task_app.mixins import UserIsOwnerMixin
 from django.http import HttpResponseRedirect
-
-class TaskListView(ListView):
+from django.contrib.auth.mixins import LoginRequiredMixin
+class TaskListView(LoginRequiredMixin, ListView):
     model = models.Task
     context_object_name = "tasks"
     template_name = "tasks/task_list.html"
 
     def get_queryset(self):
         
-        queryset = super().get_queryset()
+        queryset = Task.objects.filter(author=self.request.user)
+
+
         status = self.request.GET.get("status", "")
         if status:
             queryset = queryset.filter(status=status)
@@ -32,18 +34,20 @@ class TaskListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        #######це як назва##змінна
         context["form"] = TaskFilterForm(self.request.GET)
         return context
 
 
 
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = models.Task
     context_object_name = "task"
     template_name = "tasks/task_detail.html"
 
-class TaskComentView(DetailView):
+class TaskComentView(LoginRequiredMixin, DetailView):
     model = models.Comment
     context_object_name = "task"
     template_name = "tasks/task_coment.html"

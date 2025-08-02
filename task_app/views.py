@@ -47,10 +47,23 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "task"
     template_name = "tasks/task_detail.html"
 
-class TaskComentView(LoginRequiredMixin, DetailView):
+class TaskComentView(LoginRequiredMixin, ListView):
     model = models.Comment
-    context_object_name = "task"
+    context_object_name = "comments"
     template_name = "tasks/task_coment.html"
+
+    def get_queryset(self):
+        
+        task_id = self.kwargs.get("pk")
+        task = get_object_or_404(Task, pk=task_id)
+
+
+        queryset = Comment.objects.filter(task=task)
+        
+
+        return queryset
+
+    
 
 
 

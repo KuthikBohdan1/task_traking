@@ -63,12 +63,18 @@ class CommentListView(LoginRequiredMixin, ListView):
 
         return queryset
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()  # Додаємо пусту форму до контексту
+        return context
+    
     def post(self, request, *args, **kwargs):
         comment_form = CommentForm(request.POST, request.FILES)
         if comment_form.is_valid():
             comment  = comment_form.save(commit=False)
             comment.author = request.user
-            comment.task = self.get_object()
+            task_id = self.kwargs.get("pk")  # Отримуємо task_id з URL
+            comment.task = get_object_or_404(Task, pk=task_id)  # Отримуємо Task
             comment.save()
             return redirect('tasks:task-comment', pk=comment.task.pk)
         else:

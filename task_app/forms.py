@@ -31,7 +31,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = [
             "text", 
-            "media",
+            "media"
         ]
 
         widgets = {

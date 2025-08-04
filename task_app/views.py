@@ -109,9 +109,6 @@ class ComentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 
-    
-
-
 
 
 
@@ -142,6 +139,10 @@ class TaskDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     model = models.Task
     success_url = reverse_lazy("tasks:task-list")
     template_name = "tasks/task_delete_confirmation.html"
+
+
+
+class Comme
 
 
 

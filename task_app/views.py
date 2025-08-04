@@ -1,13 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from .models import Task, Comment
-from task_app.forms import TaskForm, TaskFilterForm, ComentForm
+from task_app.forms import TaskForm, TaskFilterForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from task_app import models
 from django.views.generic import ListView, DetailView, CreateView, View, UpdateView, DeleteView
 from task_app.mixins import UserIsOwnerMixin
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 class TaskListView(LoginRequiredMixin, ListView):
     model = models.Task
     context_object_name = "tasks"
@@ -30,8 +31,6 @@ class TaskListView(LoginRequiredMixin, ListView):
         return queryset
 
     
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -47,23 +46,35 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "task"
     template_name = "tasks/task_detail.html"
 
-class TaskComentView(LoginRequiredMixin, ListView):
+
+
+
+
+class CommentListView(LoginRequiredMixin, ListView):
     model = models.Comment
     context_object_name = "comments"
-    template_name = "tasks/task_coment.html"
-
+    template_name = "tasks/task_comment.html"
+    form_class = CommentForm
     def get_queryset(self):
         
         task_id = self.kwargs.get("pk")
         task = get_object_or_404(Task, pk=task_id)
-
-
         queryset = Comment.objects.filter(task=task)
-        
 
         return queryset
-
     
+    def post(self, request, *args, **kwargs):
+        comment_form = CommentForm(request.POST, request.FILES)
+        if comment_form.is_valid():
+            comment  = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.task = self.get_object()
+            comment.save()
+            return redirect('tasks:task-comment', pk=comment.task.pk)
+        else:
+            pass
+
+
 
 
 
@@ -79,10 +90,37 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 class ComentCreateView(LoginRequiredMixin, CreateView):
     model = models.Comment
-    template_name = "tasks/task_coment.html"
-    form_class = ComentForm
-    success_url = reverse_lazy("")
+    template_name = "tasks/task_comment_form.html"
+    form_class = CommentForm
+    success_url = reverse_lazy("tasks:task-create")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+
+
+        task_id = self.kwargs['pk']
+        form.instance.task = get_object_or_404(Task, pk=task_id)
+        return super().form_valid(form)
     
+
+
+
+
+    
+    # def post(self, request, *args, **kwargs):
+    #     comment_form = CommentForm(request.POST, request.FILES)
+    #     if comment_form.is_valid():
+    #         comment  = comment_form.save(commit=False)
+    #         comment.author = request.user
+    #         comment.task = self.get_object()
+    #         comment.save()
+    #         return redirect('tasks:task-comment', pk=comment.task.pk)
+    #     else:
+    #         pass
+
+
+
+
 
 
 class TaskComplateView(LoginRequiredMixin, UserIsOwnerMixin, View):

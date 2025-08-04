@@ -109,20 +109,7 @@ class ComentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 
-
-
-
     
-    # def post(self, request, *args, **kwargs):
-    #     comment_form = CommentForm(request.POST, request.FILES)
-    #     if comment_form.is_valid():
-    #         comment  = comment_form.save(commit=False)
-    #         comment.author = request.user
-    #         comment.task = self.get_object()
-    #         comment.save()
-    #         return redirect('tasks:task-comment', pk=comment.task.pk)
-    #     else:
-    #         pass
 
 
 

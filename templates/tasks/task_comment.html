@@ -4,19 +4,30 @@
 <div class="container">
 <div class="row">
 
+  ||||||
 
 
 <div class="col"><ul class="list-group">
         
         {% for comment in comments %}
+        
+
           <li class="list-group-item"> <h3>{{ comment.text }}</h3>  author :{{ comment.author }} date:{{ comment.date }}</li>
         {% endfor %}
+
+        {% if comment.media %}
+        <div class="comment-media">
+          {% if comment.media.url|endswith:".mp4" %}
+          <img src="{{ comment.media.url }}" alt="">
+        
+        </div>
+
       </div>
 <div class="col">
   
   <div class="container mt-3">
     <h2>додати коиентар до {{ tasks.task }}</h2>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-sucess" > зберегти коментар</button>
@@ -25,7 +36,7 @@
 </div>
 
 </div>
-
+ 
 
 
 {% endblock content %}

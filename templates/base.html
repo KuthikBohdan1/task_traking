@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
+{% comment %} 
     <nav class="navbar navbar-expend-lg navbar-light bg-light">
         <a class = "navbar-brand" href="{% url 'tasks:task-list' %}">головна</a>
         <a class = "navbar-brand" href="{% url 'tasks:register' %}">Register</a>
@@ -26,7 +26,7 @@
 
         </form>
 
-    </nav>
+    </nav> {% endcomment %}
 
 
 

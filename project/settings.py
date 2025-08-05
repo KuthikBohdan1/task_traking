@@ -132,9 +132,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "task-list"
-LOGOUT_REDIRECT_URL ="/login/"
+LOGIN_REDIRECT_URL = "tasks:task-list"
+LOGOUT_REDIRECT_URL ="tasks:logout"
 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+

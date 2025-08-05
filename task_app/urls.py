@@ -7,10 +7,10 @@ urlpatterns = [
     path("<int:pk>/", views.TaskDetailView.as_view(), name = "task-detail" ),
     path("<int:pk>/comment", views.CommentListView.as_view(), name="task-comment"),
     path("<int:pk>/comment-create", views.ComentCreateView.as_view(), name="task-comment-form"),
-    path("<int:pk>/update", views.TaskUpdateView.as_view(), name = "task-update" ),
-    path("<int:pk>/delete", views.TaskDeleteView.as_view(), name = "task-delete" ),
-    path("task-create", views.TaskCreateView.as_view(), name="task-create" ),
-    path("<int:pk>/complate/" , views.TaskComplateView.as_view(), name = "task-complate")
+    path("<int:pk>/update", views.TaskUpdateView.as_view(), name = "task-update"),
+    path("<int:pk>/delete", views.TaskDeleteView.as_view(), name = "task-delete"),
+    path("task-create", views.TaskCreateView.as_view(), name="task-create"),
+    path("<int:pk>/complate/" , views.TaskComplateView.as_view(), name = "task-complate"),
 
 
     # path("login/", views.CustomLoginView.as_view(), name="login"),

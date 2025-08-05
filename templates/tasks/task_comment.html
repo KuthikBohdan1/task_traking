@@ -14,25 +14,25 @@
         {% if comment.media %}
         <div class="comment-media">
           {% if comment.media.url|endswith:".jpg" or comment.media.url|endith:".png" or comment.media.url|endswith:".jpeg" %}
-            <img src="{{ comment.media.url }}" alt="збережання коиентаря" style="max-width: :1000px;">
+            <img src="{{ comment.media.url }}" alt="збережання коментаря" style="max-width: :1000px;">
           {% elif comment.media.url|endwith:".mp4" %}
           <video width="320" height="240" controls>
             <source src="{{ comment.media.url }}" type="video/mp4">
             your brouser does suport hte video tag.
           </video>
-          {% else %}
+          {% else %} 
           <a href="{{ comment.media.url }}">завантажити файл</a>
-          {% endif %}
-        
-        </div>
-        <small>афтор {{ comment.user.username }} </small> 
+          {% endif %} 
+         
+         </div>
+        {% comment %} <small>афтор {{ comment.author.username }} </small> 
       
       <form action="{% url 'tasks:task-complate' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-sm {% if request.user in comment.likes.all %} btn-success {% else %} btn-outline-success{% endif %}">
           лайк {{ comment.likes.count }}
         </button>
-      </form> 
+      </form>  {% endcomment %}
 
 <div class="col">
   

@@ -27,4 +27,4 @@ def login_page(request):
 def logout_page(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('login')
+    return redirect('auth_system:login')

@@ -4,13 +4,15 @@
 
 <div class="container">
 <div class="row">
-        
+  <div class="col">
         {% for comment in comments %}
         
 
           <li class="list-group-item"> <h3>{{ comment.text }}</h3>  author :{{ comment.author }} date:{{ comment.date }}</li>
         {% endfor %}
 
+      </div>
+{% comment %} 
         {% if comment.media %}
         <div class="comment-media">
           {% if comment.media.url|endswith:".jpg" or comment.media.url|endith:".png" or comment.media.url|endswith:".jpeg" %}
@@ -22,17 +24,17 @@
           </video>
           {% else %} 
           <a href="{{ comment.media.url }}">завантажити файл</a>
-          {% endif %} 
+          {% endif %}  
          
          </div>
-        {% comment %} <small>афтор {{ comment.author.username }} </small> 
+         <small>афтор {{ comment.author.username }} </small> 
       
       <form action="{% url 'tasks:task-complate' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-sm {% if request.user in comment.likes.all %} btn-success {% else %} btn-outline-success{% endif %}">
           лайк {{ comment.likes.count }}
         </button>
-      </form>  {% endcomment %}
+      </form>   {% endcomment %}
 
 <div class="col">
   
@@ -46,6 +48,7 @@
 
 </div>
 
+</div>
 </div>
  
 

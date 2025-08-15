@@ -8,10 +8,10 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
         <div class="container-fluid">
 
-          <a class="nav-link" href="#">Головна</a>
+          <a class="nav-link" href="{% url 'tasks:task-list' %}">Головна</a>
           
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
@@ -25,12 +25,7 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Категорії</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Про форум</a>
-                </li>
+
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link text-danger" href="{% url 'auth_system:logout' %}">Вийти</a>
@@ -45,10 +40,7 @@
                 {% endif %}
               </ul>
       
-              <form class="d-flex mt-3" role="search" method="get" action="#">
-                <input class="form-control me-2" type="search" placeholder="Пошук" aria-label="Search" name="q">
-                <button class="btn btn-outline-success" type="submit">Пошук</button>
-              </form>
+
             </div>
           </div>
         </div>

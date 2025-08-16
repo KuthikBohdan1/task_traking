@@ -9,15 +9,15 @@
         
 
           <li class="list-group-item"> <h3>{{ comment.text }}</h3>  author :{{ comment.author }} date:{{ comment.date }}</li>
-        {% endfor %}
+        
 
-      </div>
-{% comment %} 
+      
+
         {% if comment.media %}
         <div class="comment-media">
-          {% if comment.media.url|endswith:".jpg" or comment.media.url|endith:".png" or comment.media.url|endswith:".jpeg" %}
-            <img src="{{ comment.media.url }}" alt="збережання коментаря" style="max-width: :1000px;">
-          {% elif comment.media.url|endwith:".mp4" %}
+          {% if comment.media.url|endswith:".jpg" or comment.media.url|endswith:".png" or comment.media.url|endswith:".jpeg" %}
+            <img src="{{ comment.media.url }}" class="img-fluid" alt="збережання коментаря" style="max-width:500px;">
+          {% elif comment.media.url|endswith:".mp4" %}
           <video width="320" height="240" controls>
             <source src="{{ comment.media.url }}" type="video/mp4">
             your brouser does suport hte video tag.
@@ -25,16 +25,23 @@
           {% else %} 
           <a href="{{ comment.media.url }}">завантажити файл</a>
           {% endif %}  
+          
          
          </div>
          <small>афтор {{ comment.author.username }} </small> 
+         
+      {% endif %}
       
+      
+      {% endfor %}
+      </div>
+{% comment %} 
       <form action="{% url 'tasks:task-complate' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-sm {% if request.user in comment.likes.all %} btn-success {% else %} btn-outline-success{% endif %}">
           лайк {{ comment.likes.count }}
         </button>
-      </form>   {% endcomment %}
+      </form>    {% endcomment %}
 
 <div class="col">
   
@@ -43,7 +50,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-sucess" > зберегти коментар</button>
+        <button type="submit" class="btn btn-success" > зберегти коментар</button>
     </form>
 
 </div>

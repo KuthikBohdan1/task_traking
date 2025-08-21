@@ -25,6 +25,10 @@ class TaskForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({"class": "form-control"})
 
         self.fields["deadline"].widget.attrs["class"] += " my-custom=datepicker"
+
+    
+
+##########я розказую про форму коменнітв#############
             
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -45,6 +49,9 @@ class CommentForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({"class": "form-control"})
 
+
+
+#######################################################
 
 class TaskFilterForm(forms.Form):
     STATUS_CHOICES = [

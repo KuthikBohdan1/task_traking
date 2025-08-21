@@ -83,6 +83,33 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'django',
+#         'USER': 'django_admin',
+#         'PASSWORD': 'bodik2010',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+
+#     }
+# }
+
+# 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django',   # таке саме як у POSTGRES_DB
+#         'USER': 'django_admin',        # таке саме як у POSTGRES_USER
+#         'PASSWORD': 'bodik2010',     # таке саме як у POSTGRES_PASSWORD
+#         'HOST': 'localhost',    # бо Django працює локально
+#         'PORT': '5432',
+#     }
+# }
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

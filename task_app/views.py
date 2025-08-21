@@ -50,8 +50,18 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 
 
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = models.Task
+    template_name = "tasks/task_form.html"
+    form_class = TaskForm
+    success_url = reverse_lazy("tasks:task-list")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
+################я розказую ################
 
 class CommentListView(LoginRequiredMixin, ListView):
     model = models.Comment
@@ -83,19 +93,7 @@ class CommentListView(LoginRequiredMixin, ListView):
         else:
             pass
 
-
-
-
-
-class TaskCreateView(LoginRequiredMixin, CreateView):
-    model = models.Task
-    template_name = "tasks/task_form.html"
-    form_class = TaskForm
-    success_url = reverse_lazy("tasks:task-list")
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+        
 
 class ComentCreateView(LoginRequiredMixin, CreateView):
     model = models.Comment
@@ -111,6 +109,24 @@ class ComentCreateView(LoginRequiredMixin, CreateView):
         form.instance.task = get_object_or_404(Task, pk=task_id)
         return super().form_valid(form)
     
+
+
+
+class CommentLIkeToggle(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        comment = get_object_or_404(models.Comment, pk=self.kwargs.get('pk'))
+        like_qs = models.Like.objects.filter(comment=comment, user=request.user)
+        if like_qs.exists():
+            like_qs.delete()
+        else:
+            models.Like.objects.create(comment=comment, user=request.user)
+        return HttpResponseRedirect(comment.get_absolute_url())
+
+
+##############всьо тоя вже не розказую ###################
+
+
 
 
 
@@ -144,17 +160,6 @@ class TaskDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     template_name = "tasks/task_delete_confirmation.html"
 
 
-
-# class CommentLIkeToggle(LoginRequiredMixin, View):
-
-#     def post(self, request, *args, **kwargs):
-#         comment = get_object_or_404(models.Comment, pk=self.kwargs.get('pk'))
-#         like_qs = models.Like.objects.filter(comment=comment, user=request.user)
-#         if like_qs.exists():
-#             like_qs.delete()
-#         else:
-#             models.Like.objects.create(comment=comment, user=request.user)
-#         return HttpResponseRedirect(comment.get_absolute_url())
 
 
 
